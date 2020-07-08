@@ -43,10 +43,10 @@ describe('Deploy to ECS', () => {
 
         core.getInput = jest
             .fn()
-            .mockReturnValueOnce('1') // task-definition
+            .mockReturnValueOnce('1') // desired-count
             .mockReturnValueOnce('task-definition.json') // task-definition
             .mockReturnValueOnce('service-456')         // service
-            .mockReturnValueOnce('cluster-789')        // cluster
+            .mockReturnValueOnce('cluster-789');        // cluster
 
         process.env = Object.assign(process.env, { GITHUB_WORKSPACE: __dirname });
 
@@ -269,11 +269,11 @@ describe('Deploy to ECS', () => {
     test('registers the task definition contents and creates a CodeDeploy deployment, waits for 30 minutes + deployment group wait time', async () => {
         core.getInput = jest
             .fn()
-            .mockReturnValueOnce('1') // task-definition
+            .mockReturnValueOnce('1') // desired-count
             .mockReturnValueOnce('task-definition.json') // task-definition
             .mockReturnValueOnce('service-456')         // service
             .mockReturnValueOnce('cluster-789')         // cluster
-            .mockReturnValueOnce('TRUE')               // wait-for-service-stability
+            .mockReturnValueOnce('TRUE');               // wait-for-service-stability
 
         mockEcsDescribeServices.mockImplementation(() => {
             return {
@@ -347,7 +347,7 @@ describe('Deploy to ECS', () => {
     test('registers the task definition contents and creates a CodeDeploy deployment, waits for 1 hour + deployment group\'s wait time', async () => {
         core.getInput = jest
             .fn()
-            .mockReturnValueOnce('1') // task-definition
+            .mockReturnValueOnce('1') // desired-count
             .mockReturnValueOnce('task-definition.json') // task-definition
             .mockReturnValueOnce('service-456')         // service
             .mockReturnValueOnce('cluster-789')         // cluster
@@ -424,7 +424,7 @@ describe('Deploy to ECS', () => {
     test('registers the task definition contents and creates a CodeDeploy deployment, waits for max 6 hours', async () => {
         core.getInput = jest
             .fn()
-            .mockReturnValueOnce('1') // task-definition
+            .mockReturnValueOnce('1') // desired-count
             .mockReturnValueOnce('task-definition.json') // task-definition
             .mockReturnValueOnce('service-456')         // service
             .mockReturnValueOnce('cluster-789')         // cluster
@@ -497,7 +497,7 @@ describe('Deploy to ECS', () => {
     test('does not wait for a CodeDeploy deployment, parses JSON appspec file', async () => {
         core.getInput = jest
             .fn()
-            .mockReturnValueOnce('1') // task-definition
+            .mockReturnValueOnce('1') // desired-count
             .mockReturnValueOnce('task-definition.json') // task-definition
             .mockReturnValueOnce('service-456')         // service
             .mockReturnValueOnce('cluster-789')         // cluster
@@ -640,7 +640,7 @@ describe('Deploy to ECS', () => {
    test('waits for the service to be stable', async () => {
         core.getInput = jest
             .fn()
-            .mockReturnValueOnce('1') // task-definition
+            .mockReturnValueOnce('1') // desired-count
             .mockReturnValueOnce('task-definition.json') // task-definition
             .mockReturnValueOnce('service-456')         // service
             .mockReturnValueOnce('cluster-789')         // cluster
@@ -674,7 +674,7 @@ describe('Deploy to ECS', () => {
     test('waits for the service to be stable for specified minutes', async () => {
         core.getInput = jest
             .fn()
-            .mockReturnValueOnce('1') // task-definition
+            .mockReturnValueOnce('1') // desired-count
             .mockReturnValueOnce('task-definition.json') // task-definition
             .mockReturnValueOnce('service-456')         // service
             .mockReturnValueOnce('cluster-789')         // cluster
@@ -709,7 +709,7 @@ describe('Deploy to ECS', () => {
     test('waits for the service to be stable for max 6 hours', async () => {
         core.getInput = jest
             .fn()
-            .mockReturnValueOnce('1') // task-definition
+            .mockReturnValueOnce('1') // desired-count
             .mockReturnValueOnce('task-definition.json') // task-definition
             .mockReturnValueOnce('service-456')         // service
             .mockReturnValueOnce('cluster-789')         // cluster
@@ -744,7 +744,7 @@ describe('Deploy to ECS', () => {
     test('defaults to the default cluster', async () => {
         core.getInput = jest
             .fn()
-            .mockReturnValueOnce('1') // task-definition
+            .mockReturnValueOnce('1') // desired-count
             .mockReturnValueOnce('task-definition.json') // task-definition
             .mockReturnValueOnce('service-456');         // service
 
@@ -768,7 +768,7 @@ describe('Deploy to ECS', () => {
     test('does not update service if none specified', async () => {
         core.getInput = jest
             .fn()
-            .mockReturnValueOnce('1') // task-definition
+            .mockReturnValueOnce('1') // desired-count
             .mockReturnValueOnce('task-definition.json'); // task-definition
 
         await run();
